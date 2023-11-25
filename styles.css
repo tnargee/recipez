@@ -10,11 +10,11 @@ body, html {
     align-items: center;
     justify-content: center;
     height: 100%;
-    color: #282424;
+    color: #ffffff;
     text-align: center;
     /* Update this gradient for a modern gray to dark gray/black look */
-    background: rgb(105,105,105);
-    background: linear-gradient(0deg, rgba(105,105,105,1) 0%, rgba(0,0,0,1) 100%);
+    background: rgb(33,37,41);
+    background: linear-gradient(0deg, rgba(33,37,41,1) 0%, rgb(65, 59, 59) 100%);
 }
 
 .logo {
