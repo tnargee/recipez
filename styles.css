@@ -12,8 +12,9 @@ body, html {
     height: 100%;
     color: #ffffff;
     text-align: center;
-    background: rgb(34,193,195);
-    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(45,253,156,1) 100%);
+    /* Update this gradient for a modern gray to dark gray/black look */
+    background: rgb(105,105,105);
+    background: linear-gradient(0deg, rgba(105,105,105,1) 0%, rgba(0,0,0,1) 100%);
 }
 
 .logo {
