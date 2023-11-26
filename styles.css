@@ -18,7 +18,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-top: 50px;
     text-align: center;
 }
 
@@ -81,4 +82,9 @@ h1 {
 .recipe img {
     max-width: 100%;
     border-radius: 4px;
+}
+
+.recipe-info {
+    text-align: left;
+    background: rgba(255, 255, 255, 0.1);
 }
