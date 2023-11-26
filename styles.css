@@ -1,20 +1,25 @@
 body, html {
     height: 100%;
     margin: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif; /* This is a modern, sleek font */
+    background: rgb(33,37,41);
+    background: linear-gradient(0deg, rgba(33,37,41,1) 0%, rgb(65, 59, 59) 100%);
+    color: #ffffff;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    color: #ffffff;
     text-align: center;
-    /* Update this gradient for a modern gray to dark gray/black look */
-    background: rgb(33,37,41);
-    background: linear-gradient(0deg, rgba(33,37,41,1) 0%, rgb(65, 59, 59) 100%);
 }
 
 .logo {

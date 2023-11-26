@@ -31,18 +31,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-function displayRecipes(recipes) {
+async function displayRecipes(recipes) {
     const resultsContainer = document.getElementById('recipe-results');
     resultsContainer.innerHTML = ''; // Clear previous results
 
-    recipes.forEach(recipe => {
-        const recipeElem = document.createElement('div');
-        recipeElem.classList.add('recipe');
-        recipeElem.innerHTML = `
-            <h3>${recipe.title}</h3>
-            <img src="${recipe.image}" alt="${recipe.title}">
-            <p><strong>Ready in:</strong> ${recipe.readyInMinutes} minutes</p>
-        `;
-        resultsContainer.appendChild(recipeElem);
-    });
+    for (const recipe of recipes) {
+        // Fetch more details for each recipe
+        const detailsUrl = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe.id}/information`;
+        try {
+            const detailsResponse = await fetch(detailsUrl, {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Key': 'YOUR_API_KEY',
+                    'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+                }
+            });
+            const recipeDetails = await detailsResponse.json();
+            // Now you can use recipeDetails to display the full recipe steps and ingredients
+            const recipeElem = document.createElement('div');
+            recipeElem.classList.add('recipe');
+            recipeElem.innerHTML = `
+                <h3>${recipe.title}</h3>
+                <img src="${recipe.image}" alt="${recipe.title}">
+                <p>${recipeDetails.instructions}</p>
+                <ul>${recipeDetails.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join('')}</ul>
+            `;
+            resultsContainer.appendChild(recipeElem);
+        } catch (error) {
+            console.error('Error fetching recipe details:', error);
+        }
+    }
 }
