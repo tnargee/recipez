@@ -46,22 +46,49 @@ async function displayRecipes(recipes) {
         try {
             const detailsResponse = await fetch(detailsUrl, detailsOptions);
             const recipeDetails = await detailsResponse.json();
-            const recipeElem = document.createElement('div');
-            recipeElem.classList.add('recipe');
-            recipeElem.innerHTML = `
-                <h3>${recipe.title}</h3>
-                <img src="${recipe.image}" alt="${recipe.title}">
-                <div class="recipe-info">
-                    <p><strong>Preparation time:</strong> ${recipeDetails.readyInMinutes} minutes</p>
-                    <p><strong>Servings:</strong> ${recipeDetails.servings}</p>
-                    <p><strong>Instructions:</strong> ${recipeDetails.instructions}</p>
-                    <h4>Ingredients:</h4>
-                    <ul>${recipeDetails.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join('')}</ul>
-                </div>
-            `;
-            resultsContainer.appendChild(recipeElem);
+            const standardizedInstructions = standardizeInstructions(recipeDetails.instructions);
+
+            if (recipeDetails.instructions && recipeDetails.instructions.length > 0) {
+                const recipeElem = document.createElement('div');
+                recipeElem.classList.add('recipe');
+
+                recipeElem.innerHTML = `
+                    <h1>${recipe.title}</h1>
+                    <div class="recipe-top">
+                        <img src="${recipe.image}" alt="${recipe.title}">
+                        <div class="recipe-info">
+                            <p><strong>Preparation time:</strong> ${recipeDetails.readyInMinutes} minutes</p>
+                            <p><strong>Servings:</strong> ${recipeDetails.servings}</p>
+                            <h4>Ingredients:</h4>
+                            <ul>${recipeDetails.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join('')}</ul>
+                        </div>
+                    </div>
+                    <div class="recipe-instructions">
+                        <p><strong>Instructions:</strong> ${standardizedInstructions}</p>
+                    </div>
+                `;
+
+                resultsContainer.appendChild(recipeElem);
+            }    
         } catch (error) {
             console.error('Error fetching recipe details:', error);
         }
     }
+    
+    if (resultsContainer.firstChild) {
+        resultsContainer.firstChild.scrollIntoView({ 
+            behavior: 'smooth' 
+        });
+    }
+}
+
+function standardizeInstructions(instructions) {
+    // Remove common introductory words
+    let standardized = instructions.replace(/^(Instructions:|Directions:|Instructions|Directions|instructions|directions|)\s*/i, '');
+
+    // Standardize list formatting and ensure proper sentence spacing
+    standardized = standardized.replace(/(\d+\.)\s*/g, ''); // Remove numbering like "1."
+    standardized = standardized.replace(/([.?!])([A-Z])/g, '$1 $2'); // Ensure space after periods
+
+    return standardized;
 }

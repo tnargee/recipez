@@ -7,15 +7,33 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="container">
-    <img src="RecipeZ.svg" alt="RecipeZ Logo" class="logo">
-    <h1>Find Your Recipe</h1>
-    <form id="recipe-form">
-        <input type="text" id="ingredients" placeholder="Enter ingredients (e.g., apples, flour, sugar)" required>
-        <button type="submit">Search Recipes</button>
-    </form>
-</div>
-<div id="recipe-results"></div>
-<script src="script.js"></script>
+    <header class="container">
+        <img src="RecipeZ.svg" alt="RecipeZ Logo" class="logo">
+        <h1>Find Your Recipe</h1>
+        <form id="recipe-form">
+            <input type="text" id="ingredients" placeholder="Enter ingredients (e.g., apples, flour, sugar)" required>
+            <button type="submit" onclick="location.href='./#recipe-results'">
+                Search Recipes
+            </button>
+        </form>
+    </header>
+
+    <section id="recipe-results" class="results-container">
+    <!--
+        <div class="recipe">
+            <h1>Apple Pie</h1>
+            <img src="./recipe-img-example.jpeg" alt="Example recipe pic">
+            <div class="recipe-info">
+                <p><strong>Preparation time:</strong> 30 minutes</p>
+                <p><strong>Servings:</strong> 8</p>
+                <p><strong>Instructions:</strong> Example instructions go here blah ljkansd adnkansda jkansdkj dajknsdka jdajnsdkjas d kajsndkajd a akjsndkjasndaka asjndakd</p>
+                <h4>Ingredients:</h4>
+                    <ul>apples, bread, pudding, water, sugar</ul>
+            </div>
+        </div>
+    -->    
+        
+    </section>
+    <script src="script.js"></script>
 </body>
 </html>
